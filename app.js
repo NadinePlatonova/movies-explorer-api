@@ -11,17 +11,21 @@ const {
   logout,
 } = require('./controllers/users');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const limiter = require('./middlewares/rate-limiter');
 const userRouter = require('./routes/users');
 const movieRouter = require('./routes/movies');
 
 const { PORT = 3000 } = process.env;
+const { MONGODB_URL } = require('./config');
 
 const app = express();
 
 const auth = require('./middlewares/auth');
 const errorHandler = require('./middlewares/error');
 
-mongoose.connect('mongodb://localhost:27017/bitfilmsdb', {
+limiter.handleRateLimit(app);
+
+mongoose.connect(MONGODB_URL, {
   useNewUrlParser: true,
   autoIndex: true,
 });

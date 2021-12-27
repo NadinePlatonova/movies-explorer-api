@@ -17,13 +17,7 @@ const createUser = (req, res, next) => {
     .then((user) => res.send({
       name: user.name, email: user.email,
     }))
-    .catch((err) => {
-      if (err.name === 'MongoError' && err.code === 11000) {
-        next(new ConflictError('Пользователь с таким email уже существует'));
-      } else {
-        next(err);
-      }
-    });
+    .catch(next);
 };
 
 const login = (req, res, next) => {
