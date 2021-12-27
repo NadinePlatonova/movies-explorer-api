@@ -3,17 +3,10 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const { celebrate, Joi, errors } = require('celebrate');
-const NotFoundError = require('./errors/not-found-error');
 
-const {
-  createUser,
-  login,
-  logout,
-} = require('./controllers/users');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const router = require('./routes/index');
 const limiter = require('./middlewares/rate-limiter');
-const userRouter = require('./routes/users');
-const movieRouter = require('./routes/movies');
 
 const { PORT = 3000 } = process.env;
 const { MONGODB_URL } = require('./config');
@@ -35,28 +28,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(requestLogger);
 
-app.post('/signup', celebrate({
-  body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
-    email: Joi.string().required().email(),
-    password: Joi.string().required(),
-  }),
-}), createUser);
-app.post('/signin', celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().required().email(),
-    password: Joi.string().required(),
-  }),
-}), login);
-app.post('/signout', logout);
-app.use(auth);
-
-app.use('/', userRouter);
-app.use('/', movieRouter);
-// eslint-disable-next-line no-unused-vars
-app.use((req, res) => {
-  throw new NotFoundError('Что-то пошло не так...');
-});
+router.handleRoutes(app, auth);
 
 app.use(errorLogger);
 app.use(errors());
