@@ -14,7 +14,10 @@ const { MONGODB_URL } = require('./config');
 const app = express();
 
 const auth = require('./middlewares/auth');
+const cors = require('./middlewares/cors');
 const errorHandler = require('./middlewares/error');
+
+app.use(cors);
 
 limiter.handleRateLimit(app);
 
