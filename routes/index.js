@@ -23,7 +23,7 @@ const handleRoutes = (app, auth) => {
   app.use('/', userRouter);
   app.use('/', movieRouter);
 
-  app.use(() => {
+  app.use('*', () => {
     throw new NotFoundError('Что-то пошло не так...');
   });
 };
