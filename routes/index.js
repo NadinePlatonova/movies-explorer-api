@@ -22,8 +22,8 @@ const handleRoutes = (app, auth) => {
 
   app.use('/', userRouter);
   app.use('/', movieRouter);
-  // eslint-disable-next-line no-unused-vars
-  app.use((req, res) => {
+
+  app.use(() => {
     throw new NotFoundError('Что-то пошло не так...');
   });
 };

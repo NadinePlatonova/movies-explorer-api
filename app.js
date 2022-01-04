@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
-const { celebrate, Joi, errors } = require('celebrate');
+const { errors } = require('celebrate');
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const router = require('./routes/index');
@@ -19,8 +19,6 @@ const errorHandler = require('./middlewares/error');
 
 app.use(cors);
 
-limiter.handleRateLimit(app);
-
 mongoose.connect(MONGODB_URL, {
   useNewUrlParser: true,
   autoIndex: true,
@@ -31,12 +29,11 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(requestLogger);
 
+limiter.handleRateLimit(app);
 router.handleRoutes(app, auth);
 
 app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}`);
-});
+app.listen(PORT);

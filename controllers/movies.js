@@ -3,7 +3,8 @@ const NotFoundError = require('../errors/not-found-error');
 const ForbiddenError = require('../errors/forbidden-error');
 
 const getMovies = (req, res, next) => {
-  Movie.find({})
+  const owner = req.user._id;
+  Movie.find({ owner })
     .then((movies) => res.send(movies))
     .catch(next);
 };
@@ -53,13 +54,7 @@ const deleteMovie = (req, res, next) => {
         .then((data) => res.send(data))
         .catch(next);
     })
-    .catch((err) => {
-      if (err.message === 'NotValidId') {
-        next(new NotFoundError('Фильм с указанным id не существует'));
-      } else {
-        next(err);
-      }
-    });
+    .catch(next);
 };
 
 module.exports = {
