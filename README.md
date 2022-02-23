@@ -1,4 +1,4 @@
 # movies-explorer-api
+_Бэкенд дипломного проекта Movies Explorer_
 
-* Домен сервера: https://api.bestfilms.nomoredomains.rocks
-* IP: 62.84.114.58
+Фронтенд находится в репозитории: movies-explorer-frontend.
