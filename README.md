@@ -1,25 +1,30 @@
 # Movies (backend)
-_Бэкенд дипломного проекта Movies Explorer._
 
-**Основной стек:** JavaScript, React.js, Express.js.
+_Backend for the Movies Explorer diploma project._
 
-**Основной функционал:**
-* валидация полей инпутов;
-* глобальная обработка ошибок;
-* авторизация и регистрация пользователя;
-* взаимодействие со сторонним сервером с фильмами;
-* сохранение/удаление фильмов;
-* редактирование профиля пользователя.
+**Main Stack:** JavaScript, React.js, Express.js.
 
-**Использованы:**
-* Validator и Celebrate для валидации полей инпутов;
-* Winston для логирования приложения;
-* Helmet и express-rate-limit для защиты приложения;
-* подключение к серверу MongoDB для сохранения данных.
+**Main features:**
 
-**Инструкция по разворачиванию приложения:**
-* `npm run start` — запускает сервер   
-* `npm run dev` — запускает сервер с hot-reload
+- Input field validation;
+- Global error handling;
+- User authorization and registration;
+- Interaction with an external movie server;
+- Saving/deleting movies;
+- Editing user profile.
 
-**Статус проекта:**
-* проект завершен.
+**Used technologies:**
+
+- Validator and Celebrate for input field validation;
+- Winston for application logging;
+- Helmet and express-rate-limit for application security;
+- Connection to MongoDB server for data storage.
+
+**Instructions for running the application:**
+
+- `npm run start` — starts the server
+- `npm run dev` — starts the server with hot-reload
+
+**Project status:**
+
+- The project is completed.
